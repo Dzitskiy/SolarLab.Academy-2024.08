@@ -12,8 +12,34 @@ namespace SolarLab.Academy.Infrastructure.Repository
         /// Возвращает все элементы сущности <see cref="TEntity"/>
         /// </summary>
         /// <returns>Все элементы сущности <see cref="TEntity"/></returns>
-        IQueryable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll();
 
-        //TODO
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        IEnumerable<TEntity> GetByPredicate(Func<TEntity, bool> predicate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TEntity Add(TEntity model);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TEntity Update(TEntity model);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool Delete(Guid id);
     }
 }
