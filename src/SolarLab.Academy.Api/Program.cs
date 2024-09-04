@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using SolarLab.Academy.Api.Controllers;
+using SolarLab.Academy.Api.Middlewares;
 using SolarLab.Academy.AppServices.WeatherForecast.Services;
 using SolarLab.Academy.ComponentRegistrar;
 using SolarLab.Academy.Contracts.User;
@@ -43,6 +44,8 @@ namespace SolarLab.Academy.Api
             builder.Services.AddApplicationServices();
 
             var app = builder.Build();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

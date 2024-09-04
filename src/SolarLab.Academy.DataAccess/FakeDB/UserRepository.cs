@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using SolarLab.Academy.AppServices.Exceptions;
 using SolarLab.Academy.AppServices.User.Repository;
 using SolarLab.Academy.Contracts.User;
 using SolarLab.Academy.Domain.Entities;
@@ -35,6 +36,11 @@ public class UserRepository : IUserRepository
 
     public Task<IEnumerable<UserDto>> GetAllAsync(CancellationToken cancellationToken)
     {
+        if (_users.Count == 0)
+        {
+            throw new EntitiesNotFoundException("Сущности пользователей не были найдены");
+        }   
+        
         var result = _users.Select(u => new UserDto
         {
             Id = u.Id,

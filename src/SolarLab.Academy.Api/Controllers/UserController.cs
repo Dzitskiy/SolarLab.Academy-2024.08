@@ -9,7 +9,7 @@ namespace SolarLab.Academy.Api.Controllers;
 /// Пользователи.
 /// </summary>
 [ApiController]
-[Route("")]
+[Route("[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -30,7 +30,7 @@ public class UsersController : ControllerBase
     /// <param name="model">Модель регистрации пользователя.</param>
     /// <param name="cancellationToken">Токен отмены операции.</param>
     /// <returns>Зарегистрированный пользователь.</returns>
-    [HttpPost("users")]
+    [HttpPost]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterRequestDto model, CancellationToken cancellationToken)
@@ -45,7 +45,7 @@ public class UsersController : ControllerBase
     /// </summary>
     /// <param name="cancellationToken">Токен отмены операции.</param>
     /// <returns>Коллекция зарегистрированных пользователей.</returns>
-    [HttpGet("users/all")]
+    [HttpGet("all")]
     [ProducesResponseType(typeof(IEnumerable<UserDto>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
