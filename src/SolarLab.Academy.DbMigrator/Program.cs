@@ -1,14 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace SolarLab.Academy.DbMigrator
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            var builder = Host.CreateApplicationBuilder(args);
-            builder.Services.AddHostedService<Worker>();
+            var host = Host.CreateDefaultBuilder(args).ConfigureServices((hostContext, services) =>
+            {
+                services.AddServices(hostContext.Configuration);
+            }).Build();
+            await MigrateAsync(host.Services);
+            await host.RunAsync();
+        }
 
-            var host = builder.Build();
-            host.Run();
+        private static async Task MigrateAsync(IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetService<MigrationDbContext>();
+            await context!.Database.MigrateAsync();
         }
     }
 }
