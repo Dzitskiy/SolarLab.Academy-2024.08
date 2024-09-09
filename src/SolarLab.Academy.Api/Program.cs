@@ -1,8 +1,6 @@
-using System.Reflection;
 using Microsoft.OpenApi.Models;
 using SolarLab.Academy.Api.Controllers;
 using SolarLab.Academy.Api.Middlewares;
-using SolarLab.Academy.AppServices.WeatherForecast.Services;
 using SolarLab.Academy.ComponentRegistrar;
 using SolarLab.Academy.Contracts.User;
 
