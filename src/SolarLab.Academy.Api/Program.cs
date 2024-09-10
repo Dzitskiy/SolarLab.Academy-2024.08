@@ -1,8 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SolarLab.Academy.Api.Controllers;
 using SolarLab.Academy.Api.Middlewares;
 using SolarLab.Academy.ComponentRegistrar;
 using SolarLab.Academy.Contracts.User;
+using SolarLab.Academy.DataAccess;
 
 namespace SolarLab.Academy.Api
 {
@@ -40,6 +42,7 @@ namespace SolarLab.Academy.Api
             });
             
             builder.Services.AddApplicationServices();
+            builder.Services.AddDbContext<AcademyDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
 
             var app = builder.Build();
 
