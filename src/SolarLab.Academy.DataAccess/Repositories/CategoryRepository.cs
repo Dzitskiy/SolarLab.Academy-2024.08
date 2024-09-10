@@ -12,5 +12,11 @@ namespace SolarLab.Academy.DataAccess.Repositories
         {
             _repository = repository;
         }
+
+        public async Task<Guid> AddAsync(Category model, CancellationToken cancellationToken)
+        {
+            await _repository.AddAsync(model, cancellationToken);
+            return model.Id;
+        }
     }
 }

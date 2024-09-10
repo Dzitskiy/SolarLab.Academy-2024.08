@@ -1,9 +1,12 @@
 ﻿using SolarLab.Academy.AppServices.Categories.Repositories;
+using SolarLab.Academy.Contracts.Categories;
+using SolarLab.Academy.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SolarLab.Academy.AppServices.Categories.Services
 {
@@ -14,6 +17,17 @@ namespace SolarLab.Academy.AppServices.Categories.Services
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
+        }
+
+        public Task<Guid> CreateAsync(CategoryCreateModel model, CancellationToken cancellationToken)
+        {
+            var entity = new Category
+            {
+                Name = model.Name,
+                Created = DateTime.UtcNow
+            };
+
+            return _categoryRepository.AddAsync(entity, cancellationToken);
         }
     }
 }

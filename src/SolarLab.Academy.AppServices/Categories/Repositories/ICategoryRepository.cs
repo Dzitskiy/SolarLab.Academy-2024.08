@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolarLab.Academy.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace SolarLab.Academy.AppServices.Categories.Repositories
 {
     public interface ICategoryRepository
     {
+        Task<Guid> AddAsync(Category model, CancellationToken cancellationToken);
     }
 }
