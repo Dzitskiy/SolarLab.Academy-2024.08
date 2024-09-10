@@ -11,5 +11,7 @@ namespace SolarLab.Academy.AppServices.Categories.Services
         /// <param name="cancellationToken">Токен отмены.</param>
         /// <returns>Идентификатор сохранённой сущности.</returns>
         Task<Guid> CreateAsync(CategoryCreateModel model, CancellationToken cancellationToken);
+
+        Task<CategoryInfoModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

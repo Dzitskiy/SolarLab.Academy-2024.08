@@ -29,5 +29,10 @@ namespace SolarLab.Academy.AppServices.Categories.Services
 
             return _categoryRepository.AddAsync(entity, cancellationToken);
         }
+
+        public Task<CategoryInfoModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return _categoryRepository.GetByIdAsync(id, cancellationToken);
+        }
     }
 }

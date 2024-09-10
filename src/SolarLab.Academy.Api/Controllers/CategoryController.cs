@@ -23,5 +23,13 @@ namespace SolarLab.Academy.Api.Controllers
             var result = await _categoryService.CreateAsync(model, cancellationToken);
             return StatusCode((int)HttpStatusCode.Created, result);
         }
+
+        [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(CategoryInfoModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
+        {
+            var result = await _categoryService.GetByIdAsync(id, cancellationToken);
+            return Ok(result);
+        }
     }
 }
