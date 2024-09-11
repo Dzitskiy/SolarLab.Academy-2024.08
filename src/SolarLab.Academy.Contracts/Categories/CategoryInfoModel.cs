@@ -9,7 +9,21 @@ namespace SolarLab.Academy.Contracts.Categories
     public class CategoryInfoModel
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
         public DateTime Created { get; set; }
+
+        /// <summary>
+        /// Имя категории.
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Описание.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Номер.
+        /// </summary>
+        public string Number { get; set; }
     }
 }

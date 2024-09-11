@@ -8,6 +8,16 @@
         /// <summary>
         /// Имя категории.
         /// </summary>
-        public string Name { get; set; }
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Описание.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Номер.
+        /// </summary>
+        public string Number { get; set; }
     }
 }

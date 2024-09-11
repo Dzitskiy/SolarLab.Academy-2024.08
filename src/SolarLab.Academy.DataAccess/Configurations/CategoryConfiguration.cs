@@ -15,6 +15,8 @@ namespace SolarLab.Academy.DataAccess.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasMaxLength(1000).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(5000).IsRequired();
+            builder.Property(x => x.Number).HasMaxLength(100).IsRequired();
 
             builder.HasMany(x => x.Adverts).WithOne(x => x.Category).HasForeignKey(x => x.CategoryId).IsRequired().OnDelete(DeleteBehavior.Cascade);
         }
