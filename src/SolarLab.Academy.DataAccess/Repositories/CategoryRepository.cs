@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using SolarLab.Academy.AppServices.Categories.Repositories;
 using SolarLab.Academy.Contracts.Categories;
 using SolarLab.Academy.Domain;
@@ -9,10 +11,12 @@ namespace SolarLab.Academy.DataAccess.Repositories
     public class CategoryRepository : ICategoryRepository
     {
         private readonly IRepository<Category, AcademyDbContext> _repository;
+        private readonly IMapper _mapper;
 
-        public CategoryRepository(IRepository<Category, AcademyDbContext> repository)
+        public CategoryRepository(IRepository<Category, AcademyDbContext> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<Guid> AddAsync(Category model, CancellationToken cancellationToken)
@@ -24,12 +28,7 @@ namespace SolarLab.Academy.DataAccess.Repositories
         public Task<CategoryInfoModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return _repository.GetAll().Where(s => s.Id == id)
-                .Select(s => new CategoryInfoModel 
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Created = s.Created,
-                })
+                .ProjectTo<CategoryInfoModel>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

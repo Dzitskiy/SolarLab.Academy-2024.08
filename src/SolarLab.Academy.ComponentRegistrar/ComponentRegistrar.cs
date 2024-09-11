@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using SolarLab.Academy.AppServices.Adverts.Repositories;
 using SolarLab.Academy.AppServices.Adverts.Services;
 using SolarLab.Academy.AppServices.Categories.Repositories;
 using SolarLab.Academy.AppServices.Categories.Services;
 using SolarLab.Academy.AppServices.User.Repository;
 using SolarLab.Academy.AppServices.User.Services;
+using SolarLab.Academy.ComponentRegistrar.MapProfiles;
 using SolarLab.Academy.DataAccess.Repositories;
 using SolarLab.Academy.Infrastructure.Repository;
 
@@ -24,8 +26,20 @@ namespace SolarLab.Academy.ComponentRegistrar
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
-                        
+
+            services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
+
             return services;
+        }
+
+        private static MapperConfiguration GetMapperConfiguration()
+        {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<CategoryProfile>();
+            });
+            configuration.AssertConfigurationIsValid();
+            return configuration;
         }
     }
 }
