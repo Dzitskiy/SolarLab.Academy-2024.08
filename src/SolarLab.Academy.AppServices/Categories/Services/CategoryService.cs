@@ -24,6 +24,8 @@ namespace SolarLab.Academy.AppServices.Categories.Services
             var entity = new Category
             {
                 Name = model.Name,
+                Number = model.Number,
+                Description = model.Description,
                 Created = DateTime.UtcNow
             };
 
