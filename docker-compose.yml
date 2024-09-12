@@ -1,0 +1,20 @@
+﻿services:
+  solarlab.academy.api:
+    image: solarlab.academy.api
+    build:
+      context: .
+      dockerfile: src/SolarLab.Academy.Api/Dockerfile
+  
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+        
+volumes:
+  pg-data:

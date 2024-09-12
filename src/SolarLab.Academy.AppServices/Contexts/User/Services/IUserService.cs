@@ -1,6 +1,6 @@
 ﻿using SolarLab.Academy.Contracts.User;
 
-namespace SolarLab.Academy.AppServices.User.Services;
+namespace SolarLab.Academy.AppServices.Contexts.User.Services;
 
 public interface IUserService
 {

@@ -44,6 +44,9 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception e)
         {
+            var logger = serviceProvider.GetService<ILogger<ExceptionHandlingMiddleware>>();
+            logger?.LogError(e, "Произошла ошибка: {ErrorMessage}", e.Message);
+            
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)GetStatusCode(e);
 

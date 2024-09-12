@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using SolarLab.Academy.AppServices.User.Services;
+using SolarLab.Academy.AppServices.Contexts.User.Services;
 using SolarLab.Academy.Contracts.User;
 
 namespace SolarLab.Academy.Api.Controllers;

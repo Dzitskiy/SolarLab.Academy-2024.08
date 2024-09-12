@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1AB3F77D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{6099BAB9-CD24-4B59-AC33-B066A8E06EFF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{121FC8A3-6181-4581-B315-CE82FFEF51EE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolarLab.Academy.AppServices", "src\SolarLab.Academy.AppServices\SolarLab.Academy.AppServices.csproj", "{606C961E-1C00-4892-A944-F134D74E2E42}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolarLab.Academy.Contracts", "src\SolarLab.Academy.Contracts\SolarLab.Academy.Contracts.csproj", "{DA7321BB-724C-4401-B5CB-9D18AFDCE326}"
