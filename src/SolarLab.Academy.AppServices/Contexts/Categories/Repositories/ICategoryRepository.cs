@@ -1,12 +1,7 @@
 ﻿using SolarLab.Academy.Contracts.Categories;
 using SolarLab.Academy.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SolarLab.Academy.AppServices.Categories.Repositories
+namespace SolarLab.Academy.AppServices.Contexts.Categories.Repositories
 {
     public interface ICategoryRepository
     {

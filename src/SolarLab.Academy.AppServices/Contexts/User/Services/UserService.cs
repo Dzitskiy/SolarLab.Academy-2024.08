@@ -1,8 +1,8 @@
-﻿using SolarLab.Academy.AppServices.Helpers;
-using SolarLab.Academy.AppServices.User.Repository;
+﻿using SolarLab.Academy.AppServices.Contexts.User.Repository;
+using SolarLab.Academy.AppServices.Helpers;
 using SolarLab.Academy.Contracts.User;
 
-namespace SolarLab.Academy.AppServices.User.Services;
+namespace SolarLab.Academy.AppServices.Contexts.User.Services;
 
 public class UserService : IUserService
 {

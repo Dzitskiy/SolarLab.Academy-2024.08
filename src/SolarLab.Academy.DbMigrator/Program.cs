@@ -11,7 +11,6 @@ namespace SolarLab.Academy.DbMigrator
                 services.AddServices(hostContext.Configuration);
             }).Build();
             await MigrateAsync(host.Services);
-            await host.RunAsync();
         }
 
         private static async Task MigrateAsync(IServiceProvider serviceProvider)

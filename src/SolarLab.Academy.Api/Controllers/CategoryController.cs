@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SolarLab.Academy.AppServices.Categories.Services;
 using SolarLab.Academy.Contracts.Categories;
 using System.Net;
+using SolarLab.Academy.AppServices.Contexts.Categories.Services;
 
 namespace SolarLab.Academy.Api.Controllers
 {

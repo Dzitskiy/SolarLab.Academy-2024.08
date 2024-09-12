@@ -1,6 +1,6 @@
 ﻿using SolarLab.Academy.Contracts.Categories;
 
-namespace SolarLab.Academy.AppServices.Categories.Services
+namespace SolarLab.Academy.AppServices.Contexts.Categories.Services
 {
     public interface ICategoryService
     {

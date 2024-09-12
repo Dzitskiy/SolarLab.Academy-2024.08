@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using SolarLab.Academy.AppServices.Categories.Repositories;
+using SolarLab.Academy.AppServices.Contexts.Categories.Repositories;
 using SolarLab.Academy.Contracts.Categories;
 using SolarLab.Academy.Domain;
 using SolarLab.Academy.Infrastructure.Repository;
