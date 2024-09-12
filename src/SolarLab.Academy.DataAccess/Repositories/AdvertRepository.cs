@@ -25,7 +25,7 @@ namespace SolarLab.Academy.DataAccess.Repositories
         }
 
         /// <inheritdoc />
-        public async Task<ICollection<ShortAdvertResponse>> GetBySpecificationAsync(
+        public async Task<ICollection<ShortAdvertResponse>> GetBySpecificationWithPaginationAsync(
             ISpecification<Advert> specification, int take, int? skip, CancellationToken cancellationToken)
         {
             var query = _repository
@@ -40,6 +40,14 @@ namespace SolarLab.Academy.DataAccess.Repositories
             
             return await query
                 .Take(take)
+                .ProjectTo<ShortAdvertResponse>(_mapper.ConfigurationProvider)
+                .ToArrayAsync(cancellationToken);
+        }
+
+        public async Task<ICollection<ShortAdvertResponse>> GetBySpecificationAsync(ISpecification<Advert> specification, CancellationToken cancellationToken)
+        {
+            return await _repository
+                .GetByPredicate(specification.PredicateExpression)
                 .ProjectTo<ShortAdvertResponse>(_mapper.ConfigurationProvider)
                 .ToArrayAsync(cancellationToken);
         }

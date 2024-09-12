@@ -10,17 +10,27 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Repositories
     public interface IAdvertRepository
     {
         /// <summary>
-        /// Выполняет получение объявлений по спецификации.
+        /// Выполняет получение объявлений по спецификации с пагинацией.
         /// </summary>
         /// <param name="specification">Спецификация.</param>
         /// <param name="take">Количество элементов для выборки.</param>
         /// <param name="skip">Количество элементов для пропуска.</param>
         /// <param name="cancellationToken">Токен отмены.</param>
         /// <returns>Коллекция сокращённых моделей объявлений.</returns>
-        Task<ICollection<ShortAdvertResponse>> GetBySpecificationAsync(
+        Task<ICollection<ShortAdvertResponse>> GetBySpecificationWithPaginationAsync(
             ISpecification<Advert> specification, 
             int take, 
             int? skip,
+            CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Выполняет получение объявлений по спецификации.
+        /// </summary>
+        /// <param name="specification">Спецификация.</param>
+        /// <param name="cancellationToken">Токен отмены.</param>
+        /// <returns>Коллекция сокращённых моделей объявлений.</returns>
+        Task<ICollection<ShortAdvertResponse>> GetBySpecificationAsync(
+            ISpecification<Advert> specification,
             CancellationToken cancellationToken);
         
         /// <summary>

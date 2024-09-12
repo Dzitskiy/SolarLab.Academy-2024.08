@@ -34,6 +34,18 @@ namespace SolarLab.Academy.Api.Controllers
         }
 
         /// <summary>
+        /// Выполняет поиск объявлений по категории.
+        /// </summary>
+        /// <param name="categoryId">Идентификатор категории.</param>
+        /// <param name="cancellationToken">Токен отмены.</param>
+        /// <returns>Коллекцию кратких моделей объявлений.</returns>
+        [HttpGet("by-category")]
+        public async Task<IActionResult> GetByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
+        {
+            return Ok(await _advertService.GetByCategoryAsync(categoryId, cancellationToken));
+        }
+
+        /// <summary>
         /// Выполняет поиск объявления по идентификатору.
         /// </summary>
         /// <param name="id">Идентификатор.</param>

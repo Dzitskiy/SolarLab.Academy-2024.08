@@ -15,4 +15,11 @@ public interface IAdvertSpecificationBuilder
     /// <param name="request">Запрос.</param>
     /// <returns>Спецификация.</returns>
     ISpecification<Advert> Build(SearchAdvertRequest request);
+    
+    /// <summary>
+    /// Строит спецификацию по категории.
+    /// </summary>
+    /// <param name="categoryId">Идентификатор категории.</param>
+    /// <returns>Спецификация.</returns>
+    ISpecification<Advert> Build(Guid categoryId);
 }

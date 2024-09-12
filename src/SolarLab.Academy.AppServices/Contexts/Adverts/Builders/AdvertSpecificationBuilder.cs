@@ -31,4 +31,10 @@ public class AdvertSpecificationBuilder : IAdvertSpecificationBuilder
 
         return specification;
     }
+
+    /// <inheritdoc />
+    public ISpecification<Advert> Build(Guid categoryId)
+    {
+        return new ByCategorySpecification(categoryId);
+    }
 }

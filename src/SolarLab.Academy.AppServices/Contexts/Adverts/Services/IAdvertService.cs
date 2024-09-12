@@ -15,6 +15,14 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
         /// <param name="cancellationToken"></param>
         /// <returns>Коллекцию кратких моделей объявлений.</returns>
         Task<ICollection<ShortAdvertResponse>> SearchAdvertsAsync(SearchAdvertRequest request, CancellationToken cancellationToken);
+        
+        /// <summary>
+        /// Выполняет поиск объявлений по категории.
+        /// </summary>
+        /// <param name="categoryId">Идентификатор категории.</param>
+        /// <param name="cancellationToken">Токен отмены.</param>
+        /// <returns>Коллекцию кратких моделей объявлений.</returns>
+        Task<ICollection<ShortAdvertResponse>> GetByCategoryAsync(Guid categoryId, CancellationToken cancellationToken);
 
         /// <summary>
         /// Выполняет поиск объявления по идентификатору.

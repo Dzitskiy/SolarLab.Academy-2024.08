@@ -32,7 +32,13 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
         public Task<ICollection<ShortAdvertResponse>> SearchAdvertsAsync(SearchAdvertRequest request, CancellationToken cancellationToken)
         {
             var specification = _advertSpecificationBuilder.Build(request);
-            return _advertRepository.GetBySpecificationAsync(specification, request.Take, request.Skip, cancellationToken);
+            return _advertRepository.GetBySpecificationWithPaginationAsync(specification, request.Take, request.Skip, cancellationToken);
+        }
+
+        public Task<ICollection<ShortAdvertResponse>> GetByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
+        {
+            var specification = _advertSpecificationBuilder.Build(categoryId);
+            return _advertRepository.GetBySpecificationAsync(specification, cancellationToken);
         }
 
         /// <inheritdoc />
