@@ -20,6 +20,13 @@ namespace SolarLab.Academy.DataAccess.Repositories
             _mapper = mapper;
         }
 
+        public Task<FileDto> DownloadAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return _repository.GetAll().Where(s => s.Id == id)
+                .ProjectTo<FileDto>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
         public Task<FileInfoDto> GetInfoByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return _repository.GetAll().Where(s => s.Id == id)

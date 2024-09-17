@@ -21,6 +21,11 @@ namespace SolarLab.Academy.AppServices.Contexts.Files.Services
             _mapper = mapper;
         }
 
+        public Task<FileDto> DownloadAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return _repository.DownloadAsync(id, cancellationToken);
+        }
+
         public Task<FileInfoDto> GetInfoByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return _repository.GetInfoByIdAsync(id, cancellationToken);

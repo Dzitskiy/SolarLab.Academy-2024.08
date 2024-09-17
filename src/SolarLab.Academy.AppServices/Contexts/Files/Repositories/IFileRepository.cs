@@ -18,5 +18,13 @@ namespace SolarLab.Academy.AppServices.Contexts.Files.Repositories
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<FileInfoDto> GetInfoByIdAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Скачивание файла по идетификатору.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<FileDto> DownloadAsync(Guid id, CancellationToken cancellationToken);
     }
 }

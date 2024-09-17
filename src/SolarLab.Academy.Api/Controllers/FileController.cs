@@ -41,6 +41,19 @@ namespace SolarLab.Academy.Api.Controllers
             return result == null ? NotFound() : Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Download(Guid id, CancellationToken cancellationToken)
+        {
+            var result = await _fileService.DownloadAsync(id, cancellationToken);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            Response.ContentLength = result.Content.Length;
+            return File(result.Content, result.ContentType, result.Name);
+        }
+
         private static async Task<byte[]> GetBytesAsync(IFormFile file, CancellationToken cancellationToken)
         {
             using var ms = new MemoryStream();

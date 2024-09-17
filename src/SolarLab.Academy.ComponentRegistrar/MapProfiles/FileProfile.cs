@@ -16,6 +16,8 @@ namespace SolarLab.Academy.ComponentRegistrar.MapProfiles
         {
             CreateMap<File, FileInfoDto>();
 
+            CreateMap<File, FileDto>();
+
             CreateMap<FileDto, File>()
                 .ForMember(s => s.Id, map => map.MapFrom(s => Guid.NewGuid()))
                 .ForMember(s => s.Length, map => map.MapFrom(s => s.Content.Length))
