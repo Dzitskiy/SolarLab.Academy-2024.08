@@ -5,6 +5,8 @@ using SolarLab.Academy.AppServices.Contexts.Adverts.Repositories;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Services;
 using SolarLab.Academy.AppServices.Contexts.Categories.Repositories;
 using SolarLab.Academy.AppServices.Contexts.Categories.Services;
+using SolarLab.Academy.AppServices.Contexts.Files.Repositories;
+using SolarLab.Academy.AppServices.Contexts.Files.Services;
 using SolarLab.Academy.AppServices.Contexts.User.Repository;
 using SolarLab.Academy.AppServices.Contexts.User.Services;
 using SolarLab.Academy.ComponentRegistrar.MapProfiles;
@@ -20,11 +22,13 @@ namespace SolarLab.Academy.ComponentRegistrar
             services.AddTransient<IUserService, UserService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IAdvertService, AdvertService>();
+            services.AddScoped<IFileService, FileService>();
             
             //FAKE REPO
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddScoped<IAdvertRepository, AdvertRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IFileRepository, FileRepository>();
 
             services.AddScoped<IAdvertSpecificationBuilder, AdvertSpecificationBuilder>();
             
@@ -41,6 +45,7 @@ namespace SolarLab.Academy.ComponentRegistrar
             {
                 cfg.AddProfile<CategoryProfile>();
                 cfg.AddProfile<AdvertProfile>();
+                cfg.AddProfile<FileProfile>();
             });
             configuration.AssertConfigurationIsValid();
             return configuration;
