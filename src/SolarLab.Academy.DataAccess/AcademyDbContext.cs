@@ -21,6 +21,7 @@ namespace SolarLab.Academy.DataAccess
 
             modelBuilder.ApplyConfiguration(new AdvertConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new FileConfiguration());
         }
     }
 }
