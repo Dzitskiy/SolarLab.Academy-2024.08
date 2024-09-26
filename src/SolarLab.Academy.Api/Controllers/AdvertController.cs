@@ -12,13 +12,15 @@ namespace SolarLab.Academy.Api.Controllers
     public class AdvertController : ControllerBase
     {
         private readonly IAdvertService _advertService;
+        private readonly ILogger<AdvertController> _logger;
 
         /// <summary>
         /// Инициализирует экземпляр <see cref="AdvertController"/>.
         /// </summary>
-        public AdvertController(IAdvertService advertService)
+        public AdvertController(IAdvertService advertService, ILogger<AdvertController> logger)
         {
             _advertService = advertService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -30,6 +32,7 @@ namespace SolarLab.Academy.Api.Controllers
         [HttpPost("search")]
         public async Task<IActionResult> SearchAsync(SearchAdvertRequest request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Поиск объявлений по запросу");
             return Ok(await _advertService.SearchAdvertsAsync(request, cancellationToken));
         }
 
