@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http.Extensions;
+using Serilog.Context;
 using SolarLab.Academy.AppServices.Exceptions;
 using SolarLab.Academy.Contracts.Common;
 
@@ -17,6 +19,7 @@ public class ExceptionHandlingMiddleware
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
+    private const string LogTemplate = "HTTP {RequestMethod} {RequestPath} responded {StatusCode}";
     private readonly RequestDelegate _next;
 
     /// <summary>
@@ -30,13 +33,11 @@ public class ExceptionHandlingMiddleware
     /// <summary>
     /// Выполняет операцию промежуточного ПО и передаёт управление
     /// </summary>
-    /// <param name="context"></param>
-    /// <param name="environment"></param>
-    /// <param name="serviceProvider"></param>
     public async Task Invoke(
         HttpContext context
         , IHostEnvironment environment
-        , IServiceProvider serviceProvider)
+        , IServiceProvider serviceProvider
+        , ILogger<ExceptionHandlingMiddleware> logger)
     {
         try
         {
@@ -44,11 +45,21 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception e)
         {
-            var logger = serviceProvider.GetService<ILogger<ExceptionHandlingMiddleware>>();
-            logger?.LogError(e, "Произошла ошибка: {ErrorMessage}", e.Message);
+            var statusCode = GetStatusCode(e);
+            
+            using (LogContext.PushProperty("Request.TraceId", context.TraceIdentifier))
+            using (LogContext.PushProperty("Request.UserName", context.User.Identity?.Name ?? string.Empty))
+            using (LogContext.PushProperty("Request.Connection", context.Connection.RemoteIpAddress?.ToString() ?? string.Empty))
+            using (LogContext.PushProperty("Request.DisplayUrl", context.Request.GetDisplayUrl()))
+            {
+                logger.LogError(e, LogTemplate,
+                    context.Request.Method,
+                    context.Request.Path.ToString(),
+                    (int)statusCode);
+            }
             
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)GetStatusCode(e);
+            context.Response.StatusCode = (int)statusCode;
 
             var apiError = CreateApiError(e, context, environment);
             await context.Response.WriteAsync(JsonSerializer.Serialize(apiError, JsonSerializerOptions));

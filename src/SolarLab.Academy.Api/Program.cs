@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using SolarLab.Academy.Api.Controllers;
 using SolarLab.Academy.Api.Middlewares;
 using SolarLab.Academy.ComponentRegistrar;
@@ -43,6 +44,12 @@ namespace SolarLab.Academy.Api
             
             builder.Services.AddApplicationServices();
             builder.Services.AddDbContext<AcademyDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
+
+            builder.Host.UseSerilog((context, provider, config) =>
+            {
+                config.ReadFrom.Configuration(context.Configuration)
+                    .Enrich.WithEnvironmentName();
+            });
 
             var app = builder.Build();
 
