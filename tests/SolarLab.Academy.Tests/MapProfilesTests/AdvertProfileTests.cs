@@ -42,6 +42,9 @@ public class AdvertProfileTests
     [Fact]
     public void AdvertProfile_CreateAdvertRequest_To_Advert()
     {
+        // TODO: Показать чем отличается Shoudly от Assert
+        // TODO: Как можно сделать вызов двух профайлеров и их проверку в одном тесте?
+
         // Arrange
         var name = Fixture.Create<string>();
         var description = Fixture.Create<string>();
@@ -78,6 +81,8 @@ public class AdvertProfileTests
     [Fact]
     public void AdvertProfile_Advert_To_ShortAdvertResponse()
     {
+        // TODO: что будет, если мы Advert.Category зададим?
+
         // Arrange
         var id = Guid.NewGuid();
         var name = "name";
