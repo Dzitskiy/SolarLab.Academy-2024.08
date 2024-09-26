@@ -5,8 +5,11 @@ using Moq;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Builders;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Repositories;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Services;
+using SolarLab.Academy.AppServices.Contexts.Adverts.Specifications;
+using SolarLab.Academy.AppServices.Specifications;
 using SolarLab.Academy.ComponentRegistrar.MapProfiles;
 using SolarLab.Academy.Contracts.Contexts.Adverts.Requests;
+using SolarLab.Academy.Contracts.Contexts.Adverts.Responses;
 using SolarLab.Academy.Domain;
 using Xunit;
 
@@ -70,5 +73,30 @@ public class AdvertServiceTests
         Assert.Equal(advertId, result);
         _advertRepositoryMock.Verify(x => x.CreateAsync(It.Is<Advert>(x => x.Name == name), _token), Times.Once);
         _advertRepositoryMock.Verify(x => x.CreateAsync(It.Is<Advert>(x => x.Created == now), _token), Times.Once);
+    }
+
+    [Fact]
+    public async Task GetByCategoryAsync_Should_Call_RepositoryMethod_Async()
+    {
+        // Arrange
+        var categoryId = _fixture.Create<Guid>();
+        var listResult = new List<ShortAdvertResponse>
+        {
+            new ShortAdvertResponse()
+        };
+        var specification = new ByCategorySpecification(categoryId);
+        _advertSpecificationBuilderMock
+            .Setup(x => x.Build(categoryId))
+            .Returns(specification);
+        _advertRepositoryMock
+            .Setup(x => x.GetBySpecificationAsync(specification, _token))
+            .ReturnsAsync(listResult);
+
+        // Act
+        var result = await _service.GetByCategoryAsync(categoryId, _token);
+
+        // Assert
+        Assert.Equal(listResult, result);
+        _advertRepositoryMock.Verify(x => x.GetBySpecificationAsync(It.IsAny<ISpecification<Advert>>(), _token), Times.Once);
     }
 }
