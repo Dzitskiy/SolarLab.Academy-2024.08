@@ -13,6 +13,7 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
         private readonly IAdvertRepository _advertRepository;
         private readonly IAdvertSpecificationBuilder _advertSpecificationBuilder;
         private readonly IMapper _mapper;
+        private readonly TimeProvider _timeProvider;
 
         /// <summary>
         /// Инициализирует экземпляр <see cref="AdvertService"/>.
@@ -20,12 +21,14 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
         public AdvertService(
             IAdvertRepository advertRepository, 
             IAdvertSpecificationBuilder advertSpecificationBuilder, 
-            IMapper mapper
+            IMapper mapper,
+            TimeProvider timeProvider
             )
         {
             _advertRepository = advertRepository;
             _advertSpecificationBuilder = advertSpecificationBuilder;
             _mapper = mapper;
+            _timeProvider = timeProvider;
         }
 
         /// <inheritdoc />
@@ -51,7 +54,7 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
         public async Task<Guid> CreateAsync(CreateAdvertRequest request, CancellationToken cancellationToken)
         {
             var advert = _mapper.Map<Advert>(request);
-            advert.Created = DateTime.UtcNow;
+            advert.Created = _timeProvider.GetUtcNow().DateTime;
             return await _advertRepository.CreateAsync(advert, cancellationToken);
         }
     }

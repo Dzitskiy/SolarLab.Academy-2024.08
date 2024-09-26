@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using AutoMapper;
+using Microsoft.Extensions.Time.Testing;
 using Moq;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Builders;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Repositories;
@@ -22,6 +23,7 @@ public class AdvertServiceTests
     private readonly IMapper _mapper;
     private readonly Fixture _fixture;
     private readonly CancellationToken _token;
+    private readonly FakeTimeProvider _fakeTimeProvider;
 
     public AdvertServiceTests()
     {
@@ -37,7 +39,8 @@ public class AdvertServiceTests
         });
         configurationProvider.AssertConfigurationIsValid();
         _mapper = configurationProvider.CreateMapper();
-        _service = new AdvertService(_advertRepositoryMock.Object, _advertSpecificationBuilderMock.Object, _mapper);
+        _fakeTimeProvider = new FakeTimeProvider();
+        _service = new AdvertService(_advertRepositoryMock.Object, _advertSpecificationBuilderMock.Object, _mapper, _fakeTimeProvider);
         _fixture = new Fixture();
 
         // TODO: рассказать про отличая new CancellationTokenSource().Token и CancellationToken.None
@@ -57,16 +60,15 @@ public class AdvertServiceTests
         _advertRepositoryMock
             .Setup(x => x.CreateAsync(It.IsAny<Advert>(), _token))
             .ReturnsAsync(advertId);
+        var now = _fixture.Create<DateTime>();
+        _fakeTimeProvider.SetUtcNow(now);
 
         // Act
         var result = await _service.CreateAsync(request, _token);
         
         // Assert
         Assert.Equal(advertId, result);
-        //TODO: почему дату так просто не проверить?
-        // _advertRepositoryMock.Verify(x => x.CreateAsync(It.Is<Advert>(x => x.Created == DateTime.UtcNow), _token), Times.Once);
         _advertRepositoryMock.Verify(x => x.CreateAsync(It.Is<Advert>(x => x.Name == name), _token), Times.Once);
-        var now = DateTime.UtcNow;
-        _advertRepositoryMock.Verify(x => x.CreateAsync(It.Is<Advert>(x => x.Created.Year == now.Year && x.Created.Month == now.Month && x.Created.Day == now.Day && x.Created.Hour == now.Hour && x.Created.Minute == now.Minute), _token), Times.Once);
+        _advertRepositoryMock.Verify(x => x.CreateAsync(It.Is<Advert>(x => x.Created == now), _token), Times.Once);
     }
 }

@@ -42,6 +42,7 @@ namespace SolarLab.Academy.Api
             });
             
             builder.Services.AddApplicationServices();
+            builder.Services.AddSingleton(TimeProvider.System);
             builder.Services.AddDbContext<AcademyDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
 
             var app = builder.Build();
