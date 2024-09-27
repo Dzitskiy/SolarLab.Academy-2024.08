@@ -9,19 +9,19 @@ public class CreateAdvertRequest
     /// Наименование.
     /// </summary>
     public string Name { get; set; }
-    
+
     /// <summary>
     /// Описание.
     /// </summary>
     public string Description { get; set; }
-    
+
     /// <summary>
     /// Цена.
     /// </summary>
-    public decimal Price { get; set; }
-    
+    public decimal? Price { get; set; }
+
     /// <summary>
     /// Идентификатор категории.
     /// </summary>
-    public Guid CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
 }

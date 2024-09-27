@@ -45,6 +45,8 @@ namespace SolarLab.Academy.Api
             builder.Services.AddApplicationServices();
             builder.Services.AddDbContext<AcademyDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
 
+            builder.Services.AddFluentValidation();
+
             builder.Host.UseSerilog((context, provider, config) =>
             {
                 config.ReadFrom.Configuration(context.Configuration)
