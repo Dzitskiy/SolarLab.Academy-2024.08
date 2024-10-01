@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Builders;
 using SolarLab.Academy.AppServices.Contexts.Adverts.Repositories;
@@ -10,6 +12,7 @@ using SolarLab.Academy.AppServices.Contexts.Files.Services;
 using SolarLab.Academy.AppServices.Contexts.User.Repository;
 using SolarLab.Academy.AppServices.Contexts.User.Services;
 using SolarLab.Academy.AppServices.Services;
+using SolarLab.Academy.AppServices.Validators;
 using SolarLab.Academy.ComponentRegistrar.MapProfiles;
 using SolarLab.Academy.DataAccess.Repositories;
 using SolarLab.Academy.Infrastructure.Repository;
@@ -39,6 +42,17 @@ namespace SolarLab.Academy.ComponentRegistrar
             services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
 
             services.AddScoped<IStructuralLoggingService, StructuralLoggingService>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Подключить пакеты для работы с FluentValidation.
+        /// </summary>
+        public static IServiceCollection AddFluentValidation(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<CreateAdvertValidator>();
+            services.AddFluentValidationAutoValidation();
 
             return services;
         }
