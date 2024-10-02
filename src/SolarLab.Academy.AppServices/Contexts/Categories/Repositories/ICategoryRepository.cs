@@ -17,6 +17,12 @@ namespace SolarLab.Academy.AppServices.Contexts.Categories.Repositories
         Task<Guid> AddAsync(Category model, CancellationToken cancellationToken);
 
         /// <summary>
+        /// Получить все категории.
+        /// </summary>
+        /// <returns>Модели всех категории.</returns>
+        Task<IReadOnlyCollection<CategoryInfoModel>> GetAllAsync(CancellationToken cancellationToken);
+
+        /// <summary>
         /// Получить модель категории.
         /// </summary>
         /// <param name="id">Идентификатор категории.</param>

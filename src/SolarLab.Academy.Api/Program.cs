@@ -47,6 +47,13 @@ namespace SolarLab.Academy.Api
 
             builder.Services.AddFluentValidation();
 
+            builder.Services.AddMemoryCache();
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.InstanceName = "advert_";
+                options.Configuration = builder.Configuration.GetConnectionString("Redis");
+            });
+
             builder.Host.UseSerilog((context, provider, config) =>
             {
                 config.ReadFrom.Configuration(context.Configuration)
