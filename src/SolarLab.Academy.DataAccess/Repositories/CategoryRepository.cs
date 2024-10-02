@@ -33,6 +33,14 @@ namespace SolarLab.Academy.DataAccess.Repositories
         }
 
         /// <inheritdoc/>
+        public async Task<IReadOnlyCollection<CategoryInfoModel>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            return await _repository.GetAll()
+                .ProjectTo<CategoryInfoModel>(_mapper.ConfigurationProvider)
+                .ToArrayAsync(cancellationToken);
+        }
+
+        /// <inheritdoc/>
         public Task<CategoryInfoModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return _repository.GetAll().Where(s => s.Id == id)
