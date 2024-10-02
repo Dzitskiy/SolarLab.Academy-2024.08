@@ -17,6 +17,7 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
         private readonly ILogger<AdvertService> _logger;
         private readonly IMapper _mapper;
         private readonly IStructuralLoggingService _structuralLoggingService;
+        private readonly TimeProvider _timeProvider;
 
         /// <summary>
         /// Инициализирует экземпляр <see cref="AdvertService"/>.
@@ -26,7 +27,8 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
             IAdvertSpecificationBuilder advertSpecificationBuilder, 
             ILogger<AdvertService> logger,
             IMapper mapper,
-            IStructuralLoggingService structuralLoggingService
+            IStructuralLoggingService structuralLoggingService,
+            TimeProvider timeProvider
             )
         {
             _advertRepository = advertRepository;
@@ -34,6 +36,7 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
             _logger = logger;
             _mapper = mapper;
             _structuralLoggingService = structuralLoggingService;
+            _timeProvider = timeProvider;
         }
 
         /// <inheritdoc />
@@ -62,7 +65,7 @@ namespace SolarLab.Academy.AppServices.Contexts.Adverts.Services
         public async Task<Guid> CreateAsync(CreateAdvertRequest request, CancellationToken cancellationToken)
         {
             var advert = _mapper.Map<Advert>(request);
-            advert.Created = DateTime.UtcNow;
+            advert.Created = _timeProvider.GetUtcNow().DateTime;
             return await _advertRepository.CreateAsync(advert, cancellationToken);
         }
     }
