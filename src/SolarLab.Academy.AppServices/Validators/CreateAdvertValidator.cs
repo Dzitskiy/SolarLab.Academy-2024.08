@@ -28,6 +28,7 @@ namespace SolarLab.Academy.AppServices.Validators
                 .MaximumLength(1000); // Максимальная длина
 
             RuleFor(x => x.Price) // Поле: Цена
+                .NotNull() // >= 0
                 .GreaterThanOrEqualTo(0) // >= 0
                 .LessThanOrEqualTo(1000000); // <= 1 млн.
 
