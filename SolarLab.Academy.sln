@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolarLab.Academy.Tests", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarLab.Academy.DbMigrator", "src\SolarLab.Academy.DbMigrator\SolarLab.Academy.DbMigrator.csproj", "{40B63276-24AE-4342-BCC9-3DF5457FCEEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarLab.Academy.Api.Tests", "src\tests\SolarLab.Academy.Api.Tests\SolarLab.Academy.Api.Tests.csproj", "{AB5AA79E-E715-414C-B41A-6A1F10172723}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{40B63276-24AE-4342-BCC9-3DF5457FCEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B63276-24AE-4342-BCC9-3DF5457FCEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40B63276-24AE-4342-BCC9-3DF5457FCEEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB5AA79E-E715-414C-B41A-6A1F10172723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5AA79E-E715-414C-B41A-6A1F10172723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5AA79E-E715-414C-B41A-6A1F10172723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5AA79E-E715-414C-B41A-6A1F10172723}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{546334E3-8016-4215-96BF-A556F990DEBF} = {C29A6F64-E497-4B4F-9506-3CF25DD132D1}
 		{CFF8124C-4282-4DAA-B616-5664D9D266CB} = {1AB3F77D-5C48-4F3C-A5AC-96A9D7290D56}
 		{40B63276-24AE-4342-BCC9-3DF5457FCEEA} = {ECA7A4BC-4E64-4EEE-AF3F-0A3529E59AF5}
+		{AB5AA79E-E715-414C-B41A-6A1F10172723} = {1AB3F77D-5C48-4F3C-A5AC-96A9D7290D56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73B02DA2-81CB-4062-858A-1832A1AD176E}
