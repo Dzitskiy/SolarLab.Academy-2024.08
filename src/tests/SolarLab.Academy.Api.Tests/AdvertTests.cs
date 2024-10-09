@@ -1,4 +1,4 @@
-using System.Net;
+п»їusing System.Net;
 using System.Net.Http.Json;
 using Shouldly;
 using SolarLab.Academy.Contracts.Contexts.Adverts.Requests;
@@ -8,7 +8,7 @@ using SolarLab.Academy.Domain;
 namespace SolarLab.Academy.Api.Tests
 {
     /// <summary>
-    /// Тесты для работы с объявлениями.
+    /// РўРµСЃС‚С‹ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РѕР±СЉСЏРІР»РµРЅРёСЏРјРё.
     /// </summary>
     public class AdvertTests : IClassFixture<TestWebApplication>
     {
@@ -22,7 +22,7 @@ namespace SolarLab.Academy.Api.Tests
         }
 
         /// <summary>
-        /// Успешное получение объявления.
+        /// РЈСЃРїРµС€РЅРѕРµ РїРѕР»СѓС‡РµРЅРёРµ РѕР±СЉСЏРІР»РµРЅРёСЏ.
         /// </summary>
         [Fact]
         public async Task GetValidAdvert_Should_Success()
@@ -43,7 +43,7 @@ namespace SolarLab.Academy.Api.Tests
         }
 
         /// <summary>
-        /// Успешное создание объявления.
+        /// РЈСЃРїРµС€РЅРѕРµ СЃРѕР·РґР°РЅРёРµ РѕР±СЉСЏРІР»РµРЅРёСЏ.
         /// </summary>
         [Fact]
         public async Task CreateAdvert_Should_Success()
